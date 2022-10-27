@@ -6,7 +6,7 @@ Mise en route pour tuiliser l'application :
 
 * Par le biais du terminal, placez vous dans le dossier Backend et utilisez la commande suivante: npm install.
 
-* Puis, dans le backend dans le dossier images, créez un dossier postImg  .
+* Puis, dans le backend créez le dossier images, et dans ce dossier créez un dossier postImg  .
 
 * Créer un fichier .env avec les valeurs suivantes : 
 
