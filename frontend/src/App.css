@@ -1,0 +1,325 @@
+/*---------   General Rules       ---------*/
+
+.is-divider {
+  display: block;
+  width: 30%;
+  margin: auto;
+  border-bottom: #af3e3e79 1px solid;
+}
+
+.is-divider2 {
+  display: block;
+  width: 30%;
+  margin-bottom: 10px;
+  border-bottom: #2e2e2e79 1px solid;
+}
+
+.card {
+  border-radius: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  list-style: none;
+}
+
+.content ul {
+  margin-left: 0px;
+}
+
+.content li {
+  margin-top: 0em;
+}
+
+button {
+  width: 100%;
+  margin-left: 0% !important;
+  margin-right: 0% !important;
+}
+
+/*---------   Home Rules       ---------*/
+.BoxInfo {
+  text-align: center;
+}
+
+.profile-pic {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.content h3:not(:first-child) {
+  margin-top: 0;
+}
+
+.content h3 {
+  font-size: 1.5em;
+  margin-bottom: 0.4em;
+}
+
+.post {
+  margin-bottom: 20px;
+}
+
+.nom svg {
+  color: rgb(236, 152, 152);
+}
+
+.title {
+  overflow: hidden;
+}
+
+
+.iconModify {
+  color: hsl(348, 86%, 61%);
+}
+
+.iconDelete {
+  color: black;
+}
+
+footer {
+  background-color: #1c1b1b;
+  color: white;
+  font-size: small;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+
+/*---------   AllUser Rules       ---------*/
+.centerImageprofil {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.mediaUser {
+  align-items: flex-start;
+  display: block;
+  text-align: inherit;
+}
+
+.ContentmediaUser {
+  width: 100%;
+  display: flex;
+}
+
+.h2user {
+  text-align: center;
+  font-size: 1.20em !important;
+}
+
+.eachUser {
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 0 30%;
+  margin-bottom: 20px;
+  list-style: none;
+  transition: transform 0.2s ease-in-out;
+}
+
+.user:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.user img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgb(225, 29, 72);
+  text-align: center;
+  padding: 1px;
+}
+
+/*---------   Formulaire Rules       ---------*/
+.message-header {
+  margin-bottom: 40px;
+  border-radius: 10px;
+}
+
+.breadcrumb a {
+  align-items: center;
+  color: #c74848;
+  display: flex;
+  justify-content: center;
+  padding: 0 .75em;
+}
+
+.formAddPost {
+  margin: auto;
+  margin-left: 0px;
+  margin-right: 0px;
+  text-align: center;
+}
+
+#text {
+  width: 80%;
+}
+
+.fileBtnAddPost {
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.file-labelName {
+  margin-left: 10px;
+}
+
+.message-header {
+  justify-content: center;
+}
+
+.formAuth {
+  display: grid;
+  grid-row-gap: 20px;
+  margin-top: 30px;
+  margin-left: 35%;
+  margin-right: 35%;
+}
+
+
+.butttonAuth {
+  margin-left: 25%;
+  margin-right: 25%;
+  justify-items: center;
+  border: none;
+  border-radius: 20px;
+  background-color: #FF5959;
+  color: white;
+
+}
+
+/*---------   Error Rules       ---------*/
+
+.titleError {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.box {
+  justify-content: center;
+}
+
+.agencement {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.imagesize {
+  height: 500px;
+  object-fit: cover;
+}
+
+.ErrorPolice {
+  font-size: 30px;
+}
+
+.Errorbutton {
+  padding: 0 25%;
+}
+
+/*--specific rules---*/
+
+.modal-card .field .image img {
+  max-height: 100% !important;
+  height: fit-content;
+}
+
+.modal-card-body {
+  overflow: auto;
+}
+
+.post-del-mod {
+  margin-top: 10px;
+  font-size: large;
+  display: flex;
+}
+
+.post-del-mod .iconModify {
+  padding-right: 20px;
+  padding-left: 20px;
+  border: #4E5166 1px solid;
+  border-radius: 5px 0px 0px 5px;
+  box-shadow: #c74848 0px 2px 0px 0px;
+}
+
+.post-del-mod .post-mod :hover {
+  color: lightcoral;
+  background-color: #636577;
+}
+
+.post-del-mod .iconDelete {
+  padding-right: 20px;
+  padding-left: 20px;
+  border: #4E5166 1px solid;
+  border-radius: 0px 5px 5px 0px;
+  box-shadow: #c74848 0px 2px 0px 0px;
+}
+
+.post-del-mod .post-del :hover {
+  color: #636577;
+  background-color: lightcoral;
+}
+
+.post-del-mod :hover {
+  cursor: pointer;
+}
+
+.posts-likes {
+  font-size: large;
+
+}
+
+.posts-likes .heartstyle {
+  margin-right: 10px;
+  margin-bottom: -2px !important;
+  cursor: pointer;
+}
+
+.card-posts .content {
+  font-size: large;
+}
+
+.div-button-likes {
+  align-content: center !important;
+}
+
+.likes-counter {
+  padding-left: 0px;
+  padding-right: 15px;
+}
+
+.navbar-profile-name {
+  color: rgb(255, 255, 255);
+  padding-right: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #494b5a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: grey;
+}
+
+.bouton-addPost {
+  padding: 22px;
+}
