@@ -41,7 +41,7 @@ exports.signup = async (req, res, next) => {
         }
       })
     } else {
-      return res.status(400).json({ msg: "Cette adresse email existe déjà" });
+      return res.status(403).json({ msg: "Cette adresse email existe déjà" });
     }
   });
 
@@ -69,7 +69,7 @@ exports.login = async (req, res, next) => {
         });
         res.json({ accessToken });
       } else {
-        return res.status(400).json({ msg: "l'addresse email n'existe pas" });
+        return res.status(404).json({ msg: "l'addresse email n'existe pas" });
       }
 
     });
