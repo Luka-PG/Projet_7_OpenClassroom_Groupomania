@@ -8,10 +8,10 @@ Mise en route pour tuiliser l'application :
 
 * Puis, dans le backend créez le dossier images, et dans ce dossier créez un dossier postImg  .
 
-* Créer un fichier .env avec vos valeurs suivantes que vous placerez dans le dossier backend : 
+* Créer un fichier .env avec vos valeurs mongoDB suivantes que vous placerez dans le dossier backend : 
 
     * DBCONNECT=
-    * SERVER_PORT=
+    * SERVER_PORT=3000
     * ACCESS_TOKEN_SECRET=
 
 

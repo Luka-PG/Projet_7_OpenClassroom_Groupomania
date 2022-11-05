@@ -3,6 +3,7 @@ const Post = require("../models/posts.models");
 const Users = require("../models/users.models");
 const fs = require("fs");
 
+
 /* Controleur creation post */
 exports.createPost = async (req, res, next) => {
     try {
@@ -22,9 +23,9 @@ exports.createPost = async (req, res, next) => {
                 usersLiked: [],
             };
         await Post.create(post);
-        res.json({ msg: "Publication réussie" });
+        res.status(200).json({ msg: "Publication réussie" });
     } catch (error) {
-        res.json({ msg: error.msg });
+        res.status(500).json({ error });
     }
 };
 
@@ -48,9 +49,7 @@ exports.getAllPosts = (req, res, next) => {
 
         })
         .catch((error) => {
-            res.status(400).json({
-                error: error,
-            });
+            res.status(500).json({ error });
         });
 };
 
@@ -73,64 +72,73 @@ exports.deletePost = (req, res, next) => {
     // Recup post avec id
     Post.findOne({ _id: req.params.id })
         .then((post) => {
-            // Empêcher n'importe qu'elle utilisateur de delete une post
-            if (!post) {
-                res.status(404).json({
-                    error: new Error('No such Post!')
-                });
-            }
-            console.log(post)
-            if (post.imageUrl) {
-                const filename = post.imageUrl;
-                fs.unlink(`images/postImg/${filename}`, () => {
+            if (post.userId === req.userId || req.role === 1) {
+                // Empêcher n'importe quel utilisateur de delete une post
+                if (!post) {
+                    res.status(404).json({
+                        error: new Error('No such Post!')
+                    });
+                }
+                console.log(post)
+                if (post.imageUrl) {
+                    const filename = post.imageUrl;
+                    fs.unlink(`images/postImg/${filename}`, () => {
 
+                        Post.deleteOne({ _id: req.params.id })
+                            .then(() => res.status(200).json({ message: "Post supprimé !" }))
+                            .catch((error) => res.status(500).json({ error }));
+                    });
+                } else {
                     Post.deleteOne({ _id: req.params.id })
                         .then(() => res.status(200).json({ message: "Post supprimé !" }))
-                        .catch((error) => res.status(400).json({ error }));
-                });
+                        .catch((error) => res.status(500).json({ error }));
+                }
             } else {
-                Post.deleteOne({ _id: req.params.id })
-                    .then(() => res.status(200).json({ message: "Post supprimé !" }))
-                    .catch((error) => res.status(400).json({ error }));
+                res.status(403).json({ error });
             }
 
         })
         .catch((error) => res.status(500).json({ error }));
+
 };
 
 
 /* Controleur modification post */
 exports.modifyPost = (req, res, next) => {
+
     // Recup post avec id
-
     Post.findOne().where({ _id: req.body.id })
-
         .then((post) => {
-            // Enregistrement ancienne imgUrl (si nouvelle image dans modif)
-            const oldUrl = post.imageUrl;
+            if (Post.userId === req.userId || req.role === 1) {
+                // Enregistrement ancienne imgUrl (si nouvelle image dans modif)
+                const oldUrl = post.imageUrl;
 
-            const postObject = req.file ? {
-                ...req.body,
-                imageUrl: `${req.file.filename}`
-            } : { ...req.body, imageUrl: oldUrl };
+                const postObject = req.file ? {
+                    ...req.body,
+                    imageUrl: `${req.file.filename}`
+                } : { ...req.body, imageUrl: oldUrl };
 
-            if (req.file) {
-                console.log(oldUrl)
-                let splitUrl = oldUrl;
+                if (req.file) {
+                    console.log(oldUrl)
+                    let splitUrl = oldUrl;
 
-                fs.unlink(`./images/postImg/${splitUrl}`, () => {
+                    fs.unlink(`./images/postImg/${splitUrl}`, () => {
+                        Post.updateOne({ _id: req.body.id }, { ...postObject, _id: req.body.id })
+                            .then(() => res.status(200).json({ message: 'Post modifié !' }))
+                            .catch(error => res.status(500).json({ error }));
+                    });
+                } else {
                     Post.updateOne({ _id: req.body.id }, { ...postObject, _id: req.body.id })
                         .then(() => res.status(200).json({ message: 'Post modifié !' }))
-                        .catch(error => res.status(400).json({ error }));
-                });
+                        .catch(error => res.status(500).json({ error }));
+                }
             } else {
-                Post.updateOne({ _id: req.body.id }, { ...postObject, _id: req.body.id })
-                    .then(() => res.status(200).json({ message: 'Post modifié !' }))
-                    .catch(error => res.status(400).json({ error }));
+                res.status(403).json({ error });
             }
         })
         .catch((error) => res.status(500).json({ error }));
 };
+
 
 // Création de fonctionnalité permettant de Like un post
 exports.likePost = (req, res, next) => {
@@ -140,12 +148,12 @@ exports.likePost = (req, res, next) => {
             if (!post.usersLiked.includes(req.body.userId) && req.body.likes === 1) {
                 Post.updateOne({ _id: req.body._id }, { $inc: { likes: 1 }, $push: { usersLiked: req.body.userId } })
                     .then(() => res.status(200).json({ message: 'post liked !' }))
-                    .catch(error => res.status(400).json({ error }));
+                    .catch(error => res.status(500).json({ error }));
             }
             if (post.usersLiked.includes(req.body.userId) && req.body.likes === -1) {
                 Post.updateOne({ _id: req.body._id }, { $inc: { likes: -1 }, $pull: { usersLiked: req.body.userId } })
                     .then(() => res.status(200).json({ message: 'post unliked !' }))
-                    .catch(error => res.status(400).json({ error }));
+                    .catch(error => res.status(500).json({ error }));
             }
         })
         .catch(error => res.status(500).json({ error }));

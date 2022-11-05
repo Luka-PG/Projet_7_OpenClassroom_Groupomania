@@ -12,7 +12,7 @@ exports.getAllUser = (req, res, next) => {
       res.status(200).json(users);
     })
     .catch((error) => {
-      res.status(400).json({
+      res.status(500).json({
         error: error,
       });
     });
@@ -33,7 +33,7 @@ exports.signup = async (req, res, next) => {
             presentation: req.body.presentation,
             email: req.body.email,
             password: hash,
-            role: req.body.role
+            role: '0'
           });
           res.json({ msg: "Inscription réussie" });
         } catch (error) {
